@@ -1,0 +1,4 @@
+{"player_params": {"speed" : 300, "jump_velocity" : -400, "gravity" : 700}, 
+"game_data": {"target_coins_count" : 10, "spawned_coins_amount" : 25},
+"enemy_params" : {"enemy_count" : 7, "enemy_speed" : 100}
+}

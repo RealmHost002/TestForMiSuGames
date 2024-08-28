@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://buc50iaecr7g8"]
+
+[ext_resource type="Script" path="res://Enemy.gd" id="1_xu6bp"]
+[ext_resource type="Texture2D" uid="uid://xcwj4nxwqwjh" path="res://textures/bat/1.png" id="2_1ysf5"]
+[ext_resource type="Texture2D" uid="uid://c3cduxdxm44k0" path="res://textures/bat/2.png" id="3_frr70"]
+[ext_resource type="Texture2D" uid="uid://ccugdbemvknju" path="res://textures/bat/3.png" id="4_76q3v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kysgs"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f2fat"]
+radius = 181.003
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_86lx6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1ysf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_frr70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_76q3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_frr70")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8g6xg"]
+
+[node name="CharacterBody2D2" type="CharacterBody2D" groups=["enemies"]]
+position = Vector2(427, 224)
+script = ExtResource("1_xu6bp")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kysgs")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_f2fat")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 0)
+sprite_frames = SubResource("SpriteFrames_86lx6")
+autoplay = "default"
+frame_progress = 0.26173
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("CircleShape2D_8g6xg")
+
+[connection signal="timeout" from="Timer" to="." method="calculate_path_for_nav_agent"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
