@@ -745,7 +745,7 @@ scale = Vector2(0.395, 0.395)
 sprite_frames = SubResource("SpriteFrames_417ny")
 animation = &"move"
 autoplay = "move"
-frame_progress = 0.0273604
+frame_progress = 0.11412
 
 [node name="Camera" type="Camera2D" parent="Player"]
 
