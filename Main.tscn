@@ -745,9 +745,37 @@ scale = Vector2(0.395, 0.395)
 sprite_frames = SubResource("SpriteFrames_417ny")
 animation = &"move"
 autoplay = "move"
-frame_progress = 0.849955
+frame_progress = 0.0273604
 
 [node name="Camera" type="Camera2D" parent="Player"]
+
+[node name="DeadMenu" type="Control" parent="Player/Camera"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -256.0
+offset_top = -149.0
+offset_right = 256.0
+offset_bottom = 150.0
+
+[node name="Button2" type="Button" parent="Player/Camera/DeadMenu"]
+process_mode = 3
+layout_mode = 0
+offset_left = 196.0
+offset_top = 39.0
+offset_right = 325.0
+offset_bottom = 70.0
+text = "RESTART"
+
+[node name="Button3" type="Button" parent="Player/Camera/DeadMenu"]
+process_mode = 3
+layout_mode = 0
+offset_left = 196.0
+offset_top = 72.0
+offset_right = 325.0
+offset_bottom = 103.0
+text = "EXIT
+"
 
 [node name="Control" type="Control" parent="Player/Camera"]
 layout_mode = 3
@@ -892,6 +920,8 @@ offset_bottom = -106.0
 text = "0/10
 "
 
+[connection signal="pressed" from="Player/Camera/DeadMenu/Button2" to="TileMap" method="restart"]
+[connection signal="pressed" from="Player/Camera/DeadMenu/Button3" to="TileMap" method="close_game"]
 [connection signal="pressed" from="Player/Camera/Control/Button" to="TileMap" method="restart"]
 [connection signal="pressed" from="Player/Camera/Control/Button2" to="TileMap" method="gen_map"]
 [connection signal="pressed" from="Player/Camera/Control/Button3" to="TileMap" method="close_game"]
